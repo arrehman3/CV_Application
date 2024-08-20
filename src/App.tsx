@@ -1,10 +1,17 @@
+import { useState } from 'react'
 import './App.css'
+import GeneralInfo from './components/GeneralInfo'
 
 function App() {
 
+  const [generalInfo,setGeneralInfo]= useState({name:'',email:'',phone:""});
+
+  const handleGeneralInfoChange = (info) =>{
+    setGeneralInfo(info);
+  }
   return (
     <>
-      <h1>Hello World</h1>
+      <GeneralInfo data={generalInfo} onChange={handleGeneralInfoChange}/>
     </>
   )
 }
