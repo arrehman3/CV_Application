@@ -1,21 +1,36 @@
-import React from 'react'
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 
-export default function EducationalExperience({data,onChange}) {
+interface EducationalExperienceProps {
+  data: {
+    matricMarks?: string;
+    intermediateMarks?: string;
+    gpa?: string;
+  };
+  onChange: (data: {
+    matricMarks: string;
+    intermediateMarks: string;
+    gpa: string;
+  }) => void;
+}
+
+export default function EducationalExperience({
+  data,
+  onChange,
+}: EducationalExperienceProps) {
     const [matricMarks,setMatricMarks]=useState(data.matricMarks || '');
     const [intermediateMarks,setIntermediateMarks]=useState(data.intermediateMarks ||   "");
     const [gpa,setGpa]=useState(data.gpa || "");
     const [isEdit,setIsEdit]=useState(true);
 
-    const handleMatricMarks=(e)=>{
+    const handleMatricMarks=(e: { target: { value: SetStateAction<string>; }; })=>{
         setMatricMarks(e.target.value);
     }
 
-    const handleIntermediateMarks=(e)=>{
+    const handleIntermediateMarks=(e: { target: { value: SetStateAction<string>; }; })=>{
         setIntermediateMarks(e.target.value);
     }
 
-    const handleGpa=(e)=>{
+    const handleGpa=(e: { target: { value: SetStateAction<string>; }; })=>{
         setGpa(e.target.value);
     }
 
@@ -23,7 +38,7 @@ export default function EducationalExperience({data,onChange}) {
         setIsEdit(true);
     }
 
-    const handleeeSubmit=(e)=>{
+    const handleeeSubmit=(e: { preventDefault: () => void; })=>{
         e.preventDefault();
         onChange({matricMarks,intermediateMarks,gpa});
         setIsEdit(false);

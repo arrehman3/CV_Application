@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import './App.css'
 import GeneralInfo from './components/GeneralInfo'
 import EducationalExperience from './components/EducationalExperience';
@@ -10,16 +10,16 @@ function App() {
   const [eduacationalExperience,setEducationalExperience]=useState({matricMarks:"",intermediateMarks:"",gpa:""});
   const [personalExperience,setPersonalExperience]=useState({experience:""})
 
-  const handleGeneralInfoChange = (info) =>{
+  const handleGeneralInfoChange = (info: SetStateAction<{ name: string; email: string; phone: string; }>) =>{
     setGeneralInfo(info);
   }
 
-  const handleEducationalInfoChange=(info)=>{
+  const handleEducationalInfoChange=(info: SetStateAction<{ matricMarks: string; intermediateMarks: string; gpa: string; }>)=>{
     setEducationalExperience(info);
     
   }
 
-  const handlePersonalExperienceChange=(info)=>{
+  const handlePersonalExperienceChange=(info: SetStateAction<{ experience: string; }>)=>{
     setPersonalExperience(info);
   }
   return (

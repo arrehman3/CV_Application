@@ -1,17 +1,25 @@
-import Reac,{useState} from 'react'
+import {SetStateAction, useState} from 'react'
 
-export default function PracticalExperience({data,onChange}) {
+
+interface PracticalExperienceProps {
+  data: {
+    experience: string;
+  };
+  onChange: (data: { experience: string }) => void;
+}
+
+export default function PracticalExperience({ data, onChange }: PracticalExperienceProps) {
     const[experience,setExperience]= useState(data.experience || "");
     const [isEdit,setIsEdit]=useState(true);
 
-    const handlePracticalExperienceChange=(e)=>setExperience(e.target.value)
+    const handlePracticalExperienceChange=(e: { target: { value: SetStateAction<string>; }; })=>setExperience(e.target.value)
 
     const handleEdit=()=>{
         setIsEdit(true);
     }
 
     
-    const handleSubmitButton=(e)=>{
+    const handleSubmitButton=(e: { preventDefault: () => void; })=>{
         e.preventDefault();
         onChange({experience});
         setIsEdit(false);

@@ -1,16 +1,31 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-export default function GeneralInfo({data,onChange}) {
+import React from 'react';
+
+interface GeneralInfoProps {
+  data: {
+    name: string;
+    email: string;
+    phone: string;
+  };
+  onChange: (data: {
+    name: string;
+    email: string;
+    phone: string;
+  }) => void;
+}
+
+export default function GeneralInfo({ data, onChange }: GeneralInfoProps) {
     const [name,setName]=useState(data.name||'');
     const [email,setEmail]=useState(data.email||'');
     const [phone,setPhone]=useState(data.phone ||'');
     const [isEditing,setIsEditing]=useState(true);
 
-    const handleNameChange=(e)=>setName(e.target.value);
-    const handleEmailChange=(e)=>setEmail(e.target.value);
-    const handlePhoneChange=(e)=>setPhone(e.target.value);
+    const handleNameChange=(e: { target: { value: React.SetStateAction<string>; }; })=>setName(e.target.value);
+    const handleEmailChange=(e: { target: { value: React.SetStateAction<string>; }; })=>setEmail(e.target.value);
+    const handlePhoneChange=(e: { target: { value: React.SetStateAction<string>; }; })=>setPhone(e.target.value);
 
-    const handleSubmit=(e)=>{
+    const handleSubmit=(e: { preventDefault: () => void; })=>{
         e.preventDefault();
         onChange({name,email,phone})
         setIsEditing(false);
